@@ -14,6 +14,7 @@ public class LoginController {
     @GetMapping("/login")
     public String login(Model model){
         model.addAttribute("loginModel", new LoginModel());
+        model.addAttribute("mostrarMensaje", false);
         return "login";
     }
 
@@ -22,8 +23,13 @@ public class LoginController {
             , Model model){
         if(loginModel.getUsuario().equals("lsalvatierra") &&
                 loginModel.getPassword().equals("123")){
+            model.addAttribute("mensaje", "Bienvenido: "
+                    + loginModel.getUsuario());
             return "home";
         }
+        model.addAttribute("mostrarMensaje", true);
+        model.addAttribute("mensaje",
+                "Usuario y/o password incorrecto!");
         return "login";
     }
 }
